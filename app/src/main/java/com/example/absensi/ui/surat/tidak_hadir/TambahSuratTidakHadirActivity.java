@@ -21,6 +21,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -59,6 +60,7 @@ public class TambahSuratTidakHadirActivity extends AppCompatActivity implements 
     View myview;
     private android.app.AlertDialog alertDialog;
     Button btnImage,btnSubmit;
+    Spinner sp_alasan;
     @RequiresApi(api = Build.VERSION_CODES.O)
     @SuppressLint("SetTextI18n")
     @Override
@@ -71,6 +73,7 @@ public class TambahSuratTidakHadirActivity extends AppCompatActivity implements 
         edtAlasan = findViewById(R.id.edt_alasan);
         edtTanggal = findViewById(R.id.edt_tanggal);
         imageBukti = findViewById(R.id.imageBukti);
+        sp_alasan = findViewById(R.id.sp_alasan);
         systemDataLocal = new SystemDataLocal(this);
         addSuratIzinViewModel = ViewModelProviders.of(this).get(AddSuratIzinViewModel.class);
         setSupportActionBar(toolbar);
@@ -140,7 +143,13 @@ public class TambahSuratTidakHadirActivity extends AppCompatActivity implements 
             RequestBody requestBody = RequestBody.create(MediaType.parse("multipart/form-file"),imageFile);
             final MultipartBody.Part partImage = MultipartBody.Part.createFormData("image",imageFile.getName(),requestBody);
 
-            String alasan = edtAlasan.getText().toString();
+//            String alasan = edtAlasan.getText().toString();
+            String alasan = sp_alasan.getSelectedItem().toString();
+            if(alasan.equals("-- Pilih Alasan --")){
+                alasan = "";
+            }else{
+                alasan = alasan;
+            }
             String id_users = systemDataLocal.getLoginData().getId_pegawai();
             final RequestBody reqAlasan = RequestBody.create(MediaType.parse("text/plain"),alasan);
             final RequestBody reqIdUsers = RequestBody.create(MediaType.parse("text/plain"),id_users);
