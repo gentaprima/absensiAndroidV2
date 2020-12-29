@@ -9,6 +9,7 @@ import com.example.absensi.model.gaji.TotalUangMakanResponse;
 import com.example.absensi.model.laporan.DataLaporanResponse;
 import com.example.absensi.model.login.ResponseLogin;
 import com.example.absensi.model.profile.ResponseProfile;
+import com.example.absensi.model.qr.QrInfoResponse;
 import com.example.absensi.model.register.ResponseRegister;
 import com.example.absensi.model.register.ResponseRegisterDevice;
 import com.example.absensi.model.surat.CutiResponse;
@@ -135,4 +136,7 @@ public interface ApiInterface {
                                         @Field("device_id")String device_id,
                                         @Field("password")String password);
 
+    @FormUrlEncoded
+    @POST("qr/getInfoStart")
+    Call<QrInfoResponse> getInfoQr(@Field("no_pegawai")String no_pegawai);
 }

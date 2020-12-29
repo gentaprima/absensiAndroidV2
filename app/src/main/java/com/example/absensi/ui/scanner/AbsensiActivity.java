@@ -33,7 +33,7 @@ import java.util.Objects;
 public class AbsensiActivity extends AppCompatActivity implements View.OnClickListener {
 
     private SystemDataLocal systemDataLocal;
-    TextView tv_idpegawai, tv_namapegawai,tv_date,tv_jam,tv_title;
+    TextView tv_idpegawai, tv_namapegawai,tv_date,tv_jam,tv_title,tv_start;
     Toolbar toolbar;
     Calendar calendar;
     Button btn_submit;
@@ -52,8 +52,10 @@ public class AbsensiActivity extends AppCompatActivity implements View.OnClickLi
         tv_title = findViewById(R.id.title);
         toolbar = findViewById(R.id.toolbar);
         tv_date = findViewById(R.id.tv_tanggal);
+        tv_start = findViewById(R.id.textView15);
         tv_jam = findViewById(R.id.tv_jam);
         btn_submit = findViewById(R.id.btn_submit);
+        String is_start = getIntent().getStringExtra("is_start");
         addAbsensiViewModel = ViewModelProviders.of(this).get(AddAbsensiViewModel.class);
 
         setSupportActionBar(toolbar);
@@ -84,6 +86,12 @@ public class AbsensiActivity extends AppCompatActivity implements View.OnClickLi
 
         } catch (ParseException e) {
             e.printStackTrace();
+        }
+
+        if(is_start.equals("0")){
+            tv_start.setText("Jam Masuk :");
+        }else{
+            tv_start.setText("Jam Pulang :");
         }
 
         btn_submit.setOnClickListener(this);
