@@ -40,9 +40,6 @@
     <string-array name="alasan">
         <item>-- Pilih Alasan --</item>
         <item>Sakit</item>
-        <item>Keluarga Meninggal</item>
-        <item>Keluarga Sakit</item>
-        <item>Kecelakaan</item>
         <item>Izin Lainnya</item>
     </string-array>
 </resources>

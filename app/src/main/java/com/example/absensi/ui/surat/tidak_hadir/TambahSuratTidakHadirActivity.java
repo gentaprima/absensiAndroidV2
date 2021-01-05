@@ -18,6 +18,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -99,6 +100,22 @@ public class TambahSuratTidakHadirActivity extends AppCompatActivity implements 
         btnSubmit = findViewById(R.id.btn_submit);
         btnImage.setOnClickListener(this);
         btnSubmit.setOnClickListener(this);
+        sp_alasan.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String pilihan = sp_alasan.getSelectedItem().toString();
+                if(pilihan.equals("Izin Lainnya")){
+                    edtAlasan.setVisibility(View.VISIBLE);
+                }else{
+                    edtAlasan.setVisibility(View.GONE);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
     }
 
     @Override
@@ -147,8 +164,10 @@ public class TambahSuratTidakHadirActivity extends AppCompatActivity implements 
             String alasan = sp_alasan.getSelectedItem().toString();
             if(alasan.equals("-- Pilih Alasan --")){
                 alasan = "";
-            }else{
+            }else if(alasan.equals("Sakit")){
                 alasan = alasan;
+            }else if(alasan.equals("Izin Lainnya")){
+                alasan = "Izin - "+edtAlasan.getText().toString();
             }
             String id_users = systemDataLocal.getLoginData().getId_pegawai();
             final RequestBody reqAlasan = RequestBody.create(MediaType.parse("text/plain"),alasan);

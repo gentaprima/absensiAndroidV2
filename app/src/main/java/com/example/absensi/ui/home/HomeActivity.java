@@ -3,11 +3,16 @@ package com.example.absensi.ui.home;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.view.MenuItem;
@@ -15,6 +20,7 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.absensi.R;
 import com.example.absensi.model.Users;
@@ -26,6 +32,13 @@ import com.example.absensi.ui.fragment.ReportFragment;
 import com.example.absensi.ui.profile.activity.SettingActivity;
 import com.example.absensi.ui.scanner.ScannerActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.select.Elements;
+
+import java.net.URL;
+import java.util.concurrent.TimeUnit;
 
 public class HomeActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -40,6 +53,24 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     FrameLayout containerFragment;
     TextView title;
     ImageView iv_logout;
+
+    private long getTime() throws Exception {
+        String url = "https://time.is/Unix_time_now";
+        Document doc = Jsoup.parse(new URL(url).openStream(), "UTF-8", url);
+        String[] tags = new String[] {
+                "div[id=time_section]",
+                "div[id=clock0_bg]"
+        };
+        Elements elements= doc.select(tags[0]);
+        for (int i = 0; i <tags.length; i++) {
+            elements = elements.select(tags[i]);
+        }
+        Long time = Long.parseLong(elements.text());
+        Toast.makeText(getApplicationContext(),String.valueOf(time),Toast.LENGTH_LONG).show();
+        return Long.parseLong(elements.text());
+
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,12 +83,16 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         title = findViewById(R.id.title);
         iv_logout = findViewById(R.id.iv_logout);
         Users users = systemDataLocal.getLoginData();
-        if(getSupportActionBar() != null){
+        if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayShowTitleEnabled(false);
             getSupportActionBar().setElevation(0);
         }
         iv_logout.setOnClickListener(this);
-
+        try {
+            getTime();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         if(savedInstanceState != null){
             switch (savedInstanceState.getInt("fragState")){
                 case R.id.nav_home:
