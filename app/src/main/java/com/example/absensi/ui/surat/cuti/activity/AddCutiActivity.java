@@ -22,6 +22,10 @@ import com.example.absensi.ui.surat.cuti.AddSuratCutiViewModel;
 import com.example.absensi.utils.DatePicker;
 import com.example.absensi.utils.DialogClass;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class AddCutiActivity extends AppCompatActivity implements View.OnClickListener {
 
     EditText edt_namapegawai,edt_startDate,edt_endDate,edtKeterangan;
@@ -29,6 +33,7 @@ public class AddCutiActivity extends AppCompatActivity implements View.OnClickLi
     private AddSuratCutiViewModel addSuratCutiViewModel;
     Button btnSubmit;
     private android.app.AlertDialog alertDialog;
+    String startDate,endDate;
     @SuppressLint({"ClickableViewAccessibility", "SetTextI18n"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,8 +70,20 @@ public class AddCutiActivity extends AppCompatActivity implements View.OnClickLi
                         @SuppressLint("SetTextI18n")
                         @Override
                         public void onDateSet(android.widget.DatePicker view, int year, int month, int dayOfMonth) {
+                            final String OLD_FORMAT = "yyyy-MM-dd";
+                            final String NEW_FORMAT = "EEEE, dd MMMM yyyy";
                             int bulan = month+1;
-                            edt_startDate.setText(year + "-" + bulan + "-" + dayOfMonth);
+                            String date = year+"-"+bulan+"-"+dayOfMonth;
+                            startDate = date;
+                            @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat(OLD_FORMAT);
+                            try {
+                                Date d = sdf.parse(date);
+                                sdf.applyPattern(NEW_FORMAT);
+                                String newDate = sdf.format(d);
+                                edt_startDate.setText(newDate);
+                            } catch (ParseException e) {
+                                e.printStackTrace();
+                            }
                         }
                     }).show(getSupportFragmentManager(),"Tanggal");
                 }
@@ -82,8 +99,20 @@ public class AddCutiActivity extends AppCompatActivity implements View.OnClickLi
                         @SuppressLint("SetTextI18n")
                         @Override
                         public void onDateSet(android.widget.DatePicker view, int year, int month, int dayOfMonth) {
+                            final String OLD_FORMAT = "yyyy-MM-dd";
+                            final String NEW_FORMAT = "EEEE, dd MMMM yyyy";
                             int bulan = month+1;
-                            edt_endDate.setText(year + "-" + bulan + "-" + dayOfMonth);
+                            String date = year+"-"+bulan+"-"+dayOfMonth;
+                            endDate = date;
+                            @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat(OLD_FORMAT);
+                            try {
+                                Date d = sdf.parse(date);
+                                sdf.applyPattern(NEW_FORMAT);
+                                String newDate = sdf.format(d);
+                                edt_endDate.setText(newDate);
+                            } catch (ParseException e) {
+                                e.printStackTrace();
+                            }
                         }
                     }).show(getSupportFragmentManager(),"Tanggal");
                 }
@@ -104,8 +133,9 @@ public class AddCutiActivity extends AppCompatActivity implements View.OnClickLi
 
     private void addSuratCuti() {
         String keterangan = edtKeterangan.getText().toString();
-        String startDate = edt_startDate.getText().toString();
-        String endDate = edt_endDate.getText().toString();
+//        String startDate = edt_startDate.getText().toString();
+//        String endDate = edt_endDate.getText().toString();
+        System.out.println(startDate + " "+ endDate);
         String idUsers = systemDataLocal.getLoginData().getId_pegawai();
         View v = getLayoutInflater().inflate(R.layout.loading_alert,null,false);
         alertDialog = DialogClass.dialog(this,v).create();
