@@ -24,6 +24,26 @@ public class DataLaporanResponse {
     @SerializedName("izin")
     @Expose
     private String izin;
+    @SerializedName("jumlah_kerja")
+    private String jumlah_kerja;
+    @SerializedName("jumlah_libur")
+    private String jumlah_libur;
+
+    public String getJumlah_kerja() {
+        return jumlah_kerja;
+    }
+
+    public void setJumlah_kerja(String jumlah_kerja) {
+        this.jumlah_kerja = jumlah_kerja;
+    }
+
+    public String getJumlah_libur() {
+        return jumlah_libur;
+    }
+
+    public void setJumlah_libur(String jumlah_libur) {
+        this.jumlah_libur = jumlah_libur;
+    }
 
     public String getHadir() {
         return hadir;

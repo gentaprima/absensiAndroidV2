@@ -25,10 +25,8 @@ public class PresensiFragment extends Fragment implements View.OnClickListener {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         cardTidakHadir = view.findViewById(R.id.cardTidakHadir);
-        cardGaji = view.findViewById(R.id.cardGaji);
         cardCuti = view.findViewById(R.id.cardCuti);
         cardTidakHadir.setOnClickListener(this);
-        cardGaji.setOnClickListener(this);
         cardCuti.setOnClickListener(this);
     }
 
@@ -46,9 +44,6 @@ public class PresensiFragment extends Fragment implements View.OnClickListener {
                 startActivity(new Intent(getContext(), SuratTidakHadirActivity.class));
                 break;
 
-            case R.id.cardGaji:
-                startActivity(new Intent(getContext(), DataGajiActivity.class));
-                break;
 
             case R.id.cardCuti:
                 startActivity(new Intent(getContext(), SuratCutiActivity.class));

@@ -19,7 +19,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.register.RegisterDeviceActivity"></activity>
+        <activity android:name=".ui.laporan.ReportActivity"></activity>
+        <activity android:name=".ui.register.RegisterDeviceActivity" />
         <activity android:name=".ui.device.ChangeDeviceActivity" />
         <activity android:name=".ui.surat.cuti.activity.DetailCutiActivity" />
         <activity android:name=".ui.surat.cuti.activity.AddCutiActivity" />
