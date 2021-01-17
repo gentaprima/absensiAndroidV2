@@ -2,16 +2,19 @@ package com.example.absensi.ui.laporan;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.View;
 import android.widget.TextView;
 
 import com.example.absensi.R;
@@ -30,6 +33,7 @@ public class ReportActivity extends AppCompatActivity {
     private Activity activity;
     private TextView tv_hadir,tv_tidakhadir,tv_izin,tv_harikerja,tv_harilibur;
     SwipeRefreshLayout swipeRefreshLayout;
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +47,22 @@ public class ReportActivity extends AppCompatActivity {
         tv_harilibur = findViewById(R.id.tv_harilibur);
         tv_izin = findViewById(R.id.tv_izin);
         swipeRefreshLayout = findViewById(R.id.swipe);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        TextView tv_title = findViewById(R.id.title);
+        tv_title.setText("Laporan Presensi");
+
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayShowTitleEnabled(false);
+        }
+
+        toolbar.setNavigationIcon(R.drawable.ic_baseline_arrow_back_24);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
         swipeRefreshLayout.setOnRefreshListener(() -> new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
