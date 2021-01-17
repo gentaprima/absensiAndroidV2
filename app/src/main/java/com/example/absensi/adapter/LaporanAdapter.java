@@ -3,6 +3,7 @@ package com.example.absensi.adapter;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.cardview.widget.CardView;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.absensi.R;
@@ -26,6 +28,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class LaporanAdapter extends RecyclerView.Adapter<LaporanAdapter.ViewHolder> {
 
@@ -69,6 +73,11 @@ public class LaporanAdapter extends RecyclerView.Adapter<LaporanAdapter.ViewHold
                 context.startActivity(detail);
             }
         });
+        String status = dataLaporan.getStatus();
+        if(status.equals("Libur")){
+            holder.cardColor.setCardBackgroundColor(Color.RED);
+//            holder.circleImageView6.setImageResource(R.color.red);
+        }
 
     }
 
@@ -79,12 +88,15 @@ public class LaporanAdapter extends RecyclerView.Adapter<LaporanAdapter.ViewHold
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView tv_hari,tv_tgl;
-        CardView cardLaporan;
+        CardView cardLaporan,cardColor;
+        CircleImageView circleImageView6;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             tv_hari = itemView.findViewById(R.id.tv_hari);
             tv_tgl = itemView.findViewById(R.id.tv_tgl);
             cardLaporan = itemView.findViewById(R.id.cardLaporan);
+            cardColor = itemView.findViewById(R.id.cardColor);
+            circleImageView6 = itemView.findViewById(R.id.circleImageView6);
         }
     }
 }
