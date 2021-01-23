@@ -75,7 +75,7 @@ public class AbsensiActivity extends AppCompatActivity implements View.OnClickLi
         LocalDateTime ldt = LocalDateTime.now();
         String dateNow = DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.ENGLISH).format(ldt);
         @SuppressLint("SimpleDateFormat") SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
-        @SuppressLint("SimpleDateFormat") SimpleDateFormat format2 = new SimpleDateFormat("dd-MMMM-yyyy");
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat format2 = new SimpleDateFormat("EEEE, dd MMMM yyyy");
         Date dateTime = new Date();
         @SuppressLint("SimpleDateFormat") SimpleDateFormat newFormat = new SimpleDateFormat("HH:mm:ss");
         timeNow = newFormat.format(dateTime);

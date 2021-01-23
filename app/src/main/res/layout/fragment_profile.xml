@@ -89,7 +89,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_activity"
-                android:text="ID Pegawai"
+                android:text="No Pegawai"
                 android:textSize="10sp"
                 app:layout_constraintStart_toEndOf="@+id/circleImageView"
                 app:layout_constraintTop_toTopOf="@+id/circleImageView"
