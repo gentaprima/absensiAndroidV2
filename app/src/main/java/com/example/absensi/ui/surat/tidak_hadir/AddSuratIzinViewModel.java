@@ -19,4 +19,8 @@ public class AddSuratIzinViewModel extends ViewModel {
     public LiveData<MessageOnly> addSuratIzin(MultipartBody.Part image, RequestBody alasan,RequestBody id_users){
         return addSuratIzinRepsitory.addSuratIzin(image,alasan,id_users);
     }
+
+    public LiveData<MessageOnly> addSuratIzinLainnya(String idUsers,String alasan){
+        return addSuratIzinRepsitory.addSuratIzinLainnya(idUsers,alasan);
+    }
 }

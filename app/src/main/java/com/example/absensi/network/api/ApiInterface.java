@@ -86,6 +86,11 @@ public interface ApiInterface {
                                    @Part("id_users")RequestBody id_users);
 
     @FormUrlEncoded
+    @POST("surat/addSuratIzinLainnya")
+    Call<MessageOnly> addSuratIzinLainnya(@Field("id_users")String id_users,
+                                          @Field("alasan")String alasan);
+
+    @FormUrlEncoded
     @POST("surat/getDataSuratIzin")
     Call<SuratIzinResponse> getDataSuratIzin(@Field("id_users") String id_users);
 

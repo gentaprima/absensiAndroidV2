@@ -39,4 +39,25 @@ public class AddSuratIzinRepsitory {
         });
         return  mutableLiveData;
     }
+
+    public  MutableLiveData<MessageOnly> addSuratIzinLainnya(String idUsers,String alasan){
+        final MutableLiveData<MessageOnly> mutableLiveData = new MutableLiveData<>();
+        Call<MessageOnly> requestOrder = apiInterface.addSuratIzinLainnya(idUsers,alasan);
+        requestOrder.enqueue(new Callback<MessageOnly>() {
+            @Override
+            public void onResponse(Call<MessageOnly> call, Response<MessageOnly> response) {
+                if(response.body() != null){
+                    mutableLiveData.postValue(response.body());
+                }else{
+                    mutableLiveData.postValue(null);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<MessageOnly> call, Throwable t) {
+                System.out.println(t.getMessage());
+            }
+        });
+        return mutableLiveData;
+    }
 }

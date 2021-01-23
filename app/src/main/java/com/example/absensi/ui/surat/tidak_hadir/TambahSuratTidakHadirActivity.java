@@ -106,6 +106,10 @@ public class TambahSuratTidakHadirActivity extends AppCompatActivity implements 
                 String pilihan = sp_alasan.getSelectedItem().toString();
                 if(pilihan.equals("Izin Lainnya")){
                     edtAlasan.setVisibility(View.VISIBLE);
+                    btnImage.setVisibility(View.GONE);
+                }else if(pilihan.equals("Sakit")){
+                    edtAlasan.setVisibility(View.GONE);
+                    btnImage.setVisibility(View.VISIBLE);
                 }else{
                     edtAlasan.setVisibility(View.GONE);
                 }
@@ -153,8 +157,10 @@ public class TambahSuratTidakHadirActivity extends AppCompatActivity implements 
         alertDialog = DialogClass.dialog(this,v).create();
         alertDialog.show();
         if(mediaPath == null){
+
             Toast.makeText(getApplicationContext(),"Pilih Gambar terlebih dahulu ...", Toast.LENGTH_LONG).show();
             alertDialog.dismiss();
+
         }else{
             final File imageFile = new File(mediaPath);
             RequestBody requestBody = RequestBody.create(MediaType.parse("multipart/form-file"),imageFile);
@@ -196,6 +202,27 @@ public class TambahSuratTidakHadirActivity extends AppCompatActivity implements 
         }
     }
 
+    private void insertIzin() {
+        View v = getLayoutInflater().inflate(R.layout.loading_alert,null,false);
+        alertDialog = DialogClass.dialog(this,v).create();
+        alertDialog.show();
+        String alasan = alasan = "Izin - "+edtAlasan.getText().toString();
+        String id_users = systemDataLocal.getLoginData().getId_pegawai();
+        addSuratIzinViewModel.addSuratIzinLainnya(id_users,alasan).observe(this, new Observer<MessageOnly>() {
+            @Override
+            public void onChanged(MessageOnly messageOnly) {
+                if(messageOnly.getStatus()){
+                    alertDialog.dismiss();
+                    Toast.makeText(getApplicationContext(),messageOnly.getMessage(),Toast.LENGTH_LONG).show();
+                    onBackPressed();
+                }else{
+                    alertDialog.dismiss();
+                    Toast.makeText(getApplicationContext(),messageOnly.getMessage(),Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+    }
+
     @Override
     public void onClick(View v) {
         switch (v.getId()){
@@ -205,7 +232,17 @@ public class TambahSuratTidakHadirActivity extends AppCompatActivity implements 
                 break;
 
             case R.id.btn_submit:
-                requestPermision();
+                String alasan = sp_alasan.getSelectedItem().toString();
+                if(alasan.equals("-- Pilih Alasan --")){
+                    alasan = "";
+                    Toast.makeText(getApplicationContext(),"Pilih Gambar terlebih dahulu ...", Toast.LENGTH_LONG).show();
+                    alertDialog.dismiss();
+                }else if(alasan.equals("Sakit")){
+                    requestPermision();
+                }else if(alasan.equals("Izin Lainnya")){
+                    insertIzin();
+                }
+
                 break;
         }
     }
