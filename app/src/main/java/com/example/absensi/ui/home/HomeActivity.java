@@ -149,7 +149,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                     case R.id.nav_presensi:
                         fm.beginTransaction().hide(active).show(fragmentPresensi).commit();
                         active = fragmentPresensi;
-                        title.setText("Data Master");
+                        title.setText("Data Presensi");
                         iv_logout.setVisibility(View.GONE);
                         return true;
 
@@ -164,7 +164,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                     case R.id.nav_laporan:
                         fm.beginTransaction().hide(active).show(fragmentReport).commit();
                         active = fragmentReport;
-                        title.setText("Laporan Presensi");
+                        title.setText("Laporan");
                         iv_logout.setVisibility(View.GONE);
                         return true;
 
