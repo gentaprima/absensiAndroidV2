@@ -34,6 +34,41 @@ public class DataLaporan implements Parcelable {
     @SerializedName("status")
     @Expose
     private String status;
+    @SerializedName("keterangan")
+    private String keterangan;
+
+    protected DataLaporan(Parcel in) {
+        idAbsensi = in.readString();
+        idUsers = in.readString();
+        checkIn = in.readString();
+        checkOut = in.readString();
+        late = in.readString();
+        workTime = in.readString();
+        date = in.readString();
+        isLate = in.readString();
+        status = in.readString();
+        keterangan = in.readString();
+    }
+
+    public static final Creator<DataLaporan> CREATOR = new Creator<DataLaporan>() {
+        @Override
+        public DataLaporan createFromParcel(Parcel in) {
+            return new DataLaporan(in);
+        }
+
+        @Override
+        public DataLaporan[] newArray(int size) {
+            return new DataLaporan[size];
+        }
+    };
+
+    public String getKeterangan() {
+        return keterangan;
+    }
+
+    public void setKeterangan(String keterangan) {
+        this.keterangan = keterangan;
+    }
 
     public String getIdAbsensi() {
         return idAbsensi;
@@ -107,48 +142,23 @@ public class DataLaporan implements Parcelable {
         this.status = status;
     }
 
+
     @Override
     public int describeContents() {
         return 0;
     }
 
     @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(this.idAbsensi);
-        dest.writeString(this.idUsers);
-        dest.writeString(this.checkIn);
-        dest.writeString(this.checkOut);
-        dest.writeString(this.late);
-        dest.writeString(this.workTime);
-        dest.writeString(this.date);
-        dest.writeString(this.isLate);
-        dest.writeString(this.status);
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(idAbsensi);
+        parcel.writeString(idUsers);
+        parcel.writeString(checkIn);
+        parcel.writeString(checkOut);
+        parcel.writeString(late);
+        parcel.writeString(workTime);
+        parcel.writeString(date);
+        parcel.writeString(isLate);
+        parcel.writeString(status);
+        parcel.writeString(keterangan);
     }
-
-    public DataLaporan() {
-    }
-
-    protected DataLaporan(Parcel in) {
-        this.idAbsensi = in.readString();
-        this.idUsers = in.readString();
-        this.checkIn = in.readString();
-        this.checkOut = in.readString();
-        this.late = in.readString();
-        this.workTime = in.readString();
-        this.date = in.readString();
-        this.isLate = in.readString();
-        this.status = in.readString();
-    }
-
-    public static final Parcelable.Creator<DataLaporan> CREATOR = new Parcelable.Creator<DataLaporan>() {
-        @Override
-        public DataLaporan createFromParcel(Parcel source) {
-            return new DataLaporan(source);
-        }
-
-        @Override
-        public DataLaporan[] newArray(int size) {
-            return new DataLaporan[size];
-        }
-    };
 }

@@ -223,6 +223,7 @@ public class TambahSuratTidakHadirActivity extends AppCompatActivity implements 
         });
     }
 
+    @SuppressLint("NonConstantResourceId")
     @Override
     public void onClick(View v) {
         switch (v.getId()){

@@ -77,6 +77,8 @@ public class LaporanAdapter extends RecyclerView.Adapter<LaporanAdapter.ViewHold
         if(status.equals("Libur")){
             holder.cardColor.setCardBackgroundColor(Color.RED);
 //            holder.circleImageView6.setImageResource(R.color.red);
+        }else if(status.equals("Libur Nasional")){
+            holder.cardColor.setCardBackgroundColor(Color.RED);
         }
 
     }

@@ -50,6 +50,52 @@
             tools:ignore="HardcodedText,RtlCompat" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <androidx.cardview.widget.CardView
+        android:visibility="gone"
+        android:id="@+id/cardKeterangan"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginStart="@dimen/margin_activity"
+        android:layout_marginEnd="@dimen/margin_activity"
+        android:layout_marginTop="@dimen/margin_low"
+        android:layout_marginBottom="4dp"
+        android:backgroundTint="@color/colorPrimary"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="0dp"
+        >
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_marginStart="@dimen/margin_low"
+                android:textColor="@color/white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Keterangan Libur : "
+                android:fontFamily="@font/capriola"
+                android:textSize="13sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="HardcodedText" />
+
+            <TextView
+                android:id="@+id/keterangan_libur"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:fontFamily="@font/capriola"
+                android:textColor="@color/white"
+                android:layout_marginEnd="@dimen/margin_low"
+                android:textSize="13sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -63,32 +109,32 @@
         app:cardCornerRadius="10dp"
         app:cardBackgroundColor="@color/colorPrimary"
         >
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:paddingBottom="@dimen/margin_activity"
-            >
+            android:paddingBottom="@dimen/margin_activity">
+
             <TextView
                 android:id="@+id/tv_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_low"
+                android:layout_marginTop="@dimen/margin_low"
+                android:fontFamily="@font/capriola"
                 android:text="Kamis, 06 September 2020"
                 android:textColor="@color/white"
-                android:layout_marginTop="@dimen/margin_low"
-                android:layout_marginStart="@dimen/margin_low"
-                tools:ignore="HardcodedText,RtlCompat"
-                android:fontFamily="@font/capriola"
-                />
+                tools:ignore="HardcodedText,RtlCompat" />
+
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
-                app:cardBackgroundColor="@color/colorSec"
                 android:layout_marginStart="@dimen/margin_low"
-                android:layout_marginEnd="@dimen/margin_low"
                 android:layout_marginTop="@dimen/margin_low"
-                app:cardCornerRadius="10dp"
-                >
+                android:layout_marginEnd="@dimen/margin_low"
+                app:cardBackgroundColor="@color/colorSec"
+                app:cardCornerRadius="10dp">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -162,10 +208,10 @@
                         app:layout_constraintTop_toBottomOf="@+id/textView12" />
 
                     <TextView
-                        android:layout_marginTop="4dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/margin_low"
+                        android:layout_marginTop="4dp"
                         android:fontFamily="@font/capriola"
                         android:text="Terlambat :"
                         android:textColor="@color/white"
@@ -174,10 +220,10 @@
                         tools:ignore="HardcodedText,RtlCompat" />
 
                     <TextView
-                        android:layout_marginTop="4dp"
                         android:id="@+id/tv_late"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
                         android:layout_marginEnd="@dimen/margin_low"
                         android:fontFamily="@font/capriola"
                         android:text="00:10:00"
@@ -191,12 +237,11 @@
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
-                app:cardBackgroundColor="@color/colorSec"
                 android:layout_marginStart="@dimen/margin_low"
-                android:layout_marginEnd="@dimen/margin_low"
                 android:layout_marginTop="@dimen/margin_low"
-                app:cardCornerRadius="10dp"
-                >
+                android:layout_marginEnd="@dimen/margin_low"
+                app:cardBackgroundColor="@color/colorSec"
+                app:cardCornerRadius="10dp">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -271,23 +316,22 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Jam Kerja :"
-                        app:layout_constraintStart_toEndOf="@+id/imageView"
-                        app:layout_constraintTop_toBottomOf="@+id/imageView2"
-                        tools:ignore="HardcodedText,RtlCompat"
-                        android:textColor="@color/white"
-                        android:fontFamily="@font/capriola"
                         android:layout_marginStart="@dimen/margin_low"
                         android:layout_marginTop="4dp"
-                        />
+                        android:fontFamily="@font/capriola"
+                        android:text="Jam Kerja :"
+                        android:textColor="@color/white"
+                        app:layout_constraintStart_toEndOf="@+id/imageView"
+                        app:layout_constraintTop_toBottomOf="@+id/imageView2"
+                        tools:ignore="HardcodedText,RtlCompat" />
 
                     <TextView
                         android:id="@+id/tv_worktime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
                         android:layout_marginEnd="@dimen/margin_low"
                         android:fontFamily="@font/capriola"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
                         android:text="00:10:00"
                         android:textColor="@color/white"
                         app:layout_constraintEnd_toEndOf="parent"
