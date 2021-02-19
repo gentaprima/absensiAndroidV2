@@ -29,6 +29,7 @@ import com.example.absensi.ui.fragment.HomeFragment;
 import com.example.absensi.ui.fragment.PresensiFragment;
 import com.example.absensi.ui.fragment.ProfileFragment;
 import com.example.absensi.ui.fragment.ReportFragment;
+import com.example.absensi.ui.login.LoginActivity;
 import com.example.absensi.ui.profile.activity.SettingActivity;
 import com.example.absensi.ui.scanner.ScannerActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -52,7 +53,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     BottomNavigationView navigationView;
     FrameLayout containerFragment;
     TextView title;
-    ImageView iv_logout;
+    ImageView iv_logout,logout;
 
     private long getTime() throws Exception {
         String url = "https://time.is/Unix_time_now";
@@ -82,12 +83,15 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         setSupportActionBar(toolbar);
         title = findViewById(R.id.title);
         iv_logout = findViewById(R.id.iv_logout);
+        logout = findViewById(R.id.logout);
+        logout.setVisibility(View.VISIBLE);
         Users users = systemDataLocal.getLoginData();
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayShowTitleEnabled(false);
             getSupportActionBar().setElevation(0);
         }
         iv_logout.setOnClickListener(this);
+        logout.setOnClickListener(this);
         try {
             getTime();
         } catch (Exception e) {
@@ -144,6 +148,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                         title.setText("Home");
                         iv_logout.setVisibility(View.GONE);
 
+
                         return true;
 
                     case R.id.nav_presensi:
@@ -151,6 +156,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                         active = fragmentPresensi;
                         title.setText("Data Presensi");
                         iv_logout.setVisibility(View.GONE);
+
                         return true;
 
                     case R.id.nav_profile:
@@ -159,6 +165,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                         title.setText("Profile");
                         iv_logout.setVisibility(View.VISIBLE);
 
+
                         return true;
 
                     case R.id.nav_laporan:
@@ -166,6 +173,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                         active = fragmentReport;
                         title.setText("Laporan");
                         iv_logout.setVisibility(View.GONE);
+
                         return true;
 
                     case R.id.nav_absensi:
@@ -189,6 +197,9 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         if(v.getId() == R.id.iv_logout){
            startActivity(new Intent(HomeActivity.this, SettingActivity.class));
+        }else if(v.getId() == R.id.logout){
+            systemDataLocal.destroySessionLogin();
+            startActivity(new Intent(HomeActivity.this, LoginActivity.class));
         }
     }
 
